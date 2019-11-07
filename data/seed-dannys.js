@@ -57,13 +57,6 @@ module.exports = [
         power_level: 99
     },
     {
-        name: 'Danny Cairns',
-        profession: 'Teacher',
-        has_dignity: false,
-        age: 28,
-        power_level: 99
-    },
-    {
         name: 'Daenerys Stormborn of House Targaryen, the First of Her Name, Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains',
         profession: 'Politician',
         has_dignity: false,
