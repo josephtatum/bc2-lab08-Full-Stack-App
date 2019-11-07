@@ -1,6 +1,6 @@
 import Component from '../Component.js';
 import Header from '../common/Header.js';
-import DannyList from '../dannyList.js';
+import DannyList from './dannyList.js';
 import { getDannys } from '../services/danny-api.js';
 
 class DannyApp extends Component {

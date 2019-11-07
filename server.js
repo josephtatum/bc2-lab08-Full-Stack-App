@@ -33,7 +33,7 @@ app.get('/api/dannys', async (req, res) => {
                 name,
                 age,
                 profession,
-                has_dignity as hasDignity,
+                has_dignity as "hasDignity",
                 power_level as "powerLevel"
             FROM DANNYS;
         `);
