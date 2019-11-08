@@ -1,8 +1,8 @@
 require('dotenv').config();
 const pg = require('pg');
 const Client = pg.Client;
-// import seed data:
 const dannys = require('./seed-dannys.js');
+const professions = require('./professions');
 
 run();
 
@@ -11,21 +11,32 @@ async function run() {
 
     try {
         await client.connect();
-    
-        // "Promise all" does a parallel execution of async tasks
-        await Promise.all(
-            // map every item in the array data
-            dannys.map(danny => {
 
-                // Use a "parameterized query" to insert the data,
-                // Don't forget to "return" the client.query promise!
+        const savedProfessions = await Promise.all(
+            professions.map(async profession => {
+                const result = await client.query(`
+                    INSERT INTO professions (name)
+                    VALUES ($1)
+                    RETURNING *;
+                `,
+                [profession]);
+
+                return result.rows[0];
+            })
+        );
+
+        await Promise.all(
+            dannys.map(danny => {
+                const profession = savedProfessions.find(profession => {
+                    return profession.name === danny.profession;
+                });
+
                 return client.query(`
-                    INSERT INTO dannys (name, profession, has_dignity, age, power_level)
+                    INSERT INTO dannys (name, profession_id, has_dignity, age, power_level)
                     VALUES ($1, $2, $3, $4, $5);
                 `,
-                
-                [danny.name, danny.profession, danny.has_dignity, danny.age, danny.power_level]);
-                
+                // uncertain here about profession.id
+                [danny.name, profession.id, danny.has_dignity, danny.age, danny.power_level]);
             })
         );
 
