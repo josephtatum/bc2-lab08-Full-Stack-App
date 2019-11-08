@@ -1,21 +1,23 @@
 import Component from '../Component.js';
 import Header from '../common/Header.js';
 import DannyForm from './dannyForm.js';
-import { getDannys } from '../services/danny-api.js';
+import { getProfessions } from '../services/danny-api.js';
 
-class DannyApp extends Component {
+class DannyFormApp extends Component {
 
     onRender(dom) {
         const header = new Header({ title: 'Only the Best Dannys' });
         dom.prepend(header.renderDOM());
 
-        const dannyForm = new DannyForm({ dannys: [] });
+        const dannyForm = new DannyForm({ professions: [] });
         const main = dom.querySelector('main');
-        main.appendChild(dannyForm.renderDOM());
 
-        getDannys().then(dannys => {
-            dannyForm.update({ dannys });
+        getProfessions().then(professions => {
+            dannyForm.update({ professions });
+            
         });
+
+        main.appendChild(dannyForm.renderDOM());
     }
 
     renderHTML() {
@@ -27,4 +29,4 @@ class DannyApp extends Component {
     }
 }
 
-export default DannyApp;
+export default DannyFormApp;
