@@ -50,22 +50,34 @@ class DannyForm extends Component {
         
         return /*html*/ `
             <form>
-                <label for="name">Name:</label><input id="name" name="name" type="text">
-                <label for="age">Age:</label><input id="age" name="age" type="number">
-                <label for="profession">Profession:</label>
-                <select id="profession" name="profession-id">
-                    ${optionsListJoined}
-                </select>
-                <label id="dignity">Does this Danny have dignity?
-                    <input type="radio" id="yes" name="dignity" value="yes">
-                    <label for="yes">Yes</label>
-                    <input type="radio" id="no" name="dignity" value="no" checked>
-                    <label for="no">No</label>
-                </label>
-                <label for="power-level">Power Level</label>
-                <input type="range" min="1" max="100" value="50" class="slider" name="power-level" id="power-level">
-                <span class="range-number"></span>
-                <button type="submit">Add</button>
+                <div>
+                    <label for="name">Name: </label><input id="name" name="name" type="text">
+                </div>
+                <div>
+                    <label for="age">Age: </label><input id="age" name="age" type="number">
+                </div>
+                <div>
+                    <label for="profession">Profession: </label>
+                    <select id="profession" name="profession-id">
+                        ${optionsListJoined}
+                    </select>
+                </div>
+                <div>
+                    <label id="dignity">Does this Danny have dignity?
+                        <input type="radio" id="yes" name="dignity" value="yes">
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="dignity" value="no" checked>
+                        <label for="no">No</label>
+                    </label>
+                </div>
+                <div>
+                    <label for="power-level">Power Level</label>
+                    <input type="range" min="1" max="100" value="50" class="slider" name="power-level" id="power-level">
+                    <span class="range-number"></span>
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                </div>
             </form>
         `;
     }

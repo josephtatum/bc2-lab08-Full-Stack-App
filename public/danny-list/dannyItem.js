@@ -4,7 +4,6 @@ class DannyItem extends Component {
 
     renderHTML() {
         const danny = this.props.danny;
-        console.log(danny)
         return /*html*/ `
             <li class="danny-item">
                 <div class="info-container">
