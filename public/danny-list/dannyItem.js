@@ -9,10 +9,10 @@ class DannyItem extends Component {
             <li class="danny-item">
                 <div class="info-container">
                     <h2>${danny.name}</h2>
-                    <p class="danny-profession">${danny.profession}</p>
-                    <p class="danny-age">${danny.age}</p>
-                    <p class="danny-power">${danny.power_level}</p>
-                    <p class="danny-dignity">This is a dignified Dan: ${danny.has_dignity}</p>
+                    <p class="danny-profession">Profession: ${danny.profession}</p>
+                    <p class="danny-age">Age: ${danny.age}</p>
+                    <p class="danny-power">Power Level: ${danny.power_level}</p>
+                    <p class="danny-dignity">Dignity: ${danny.has_dignity}</p>
                 </div>
             </li>
         `;
