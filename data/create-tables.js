@@ -1,32 +1,29 @@
-// load connection string from .env
 require('dotenv').config();
-// "require" pg (after `npm i pg`)
 const pg = require('pg');
-// Use the pg Client
 const Client = pg.Client;
-// **note:** you will need to create the database!
 
-// async/await needs to run in a function
 run();
 
 async function run() {
-    // make a new pg client to the supplied url
     const client = new Client(process.env.DATABASE_URL);
 
     try {
-        // initiate connecting to db
         await client.connect();
     
-        // run a query to create tables
         await client.query(`
-          CREATE TABLE dannys (
-              id SERIAL PRIMARY KEY NOT NULL,
-              name VARCHAR(256) NOT NULL,
-              age INTEGER NOT NULL,
-              profession VARCHAR(256) NOT NULL,
-              has_dignity BOOLEAN NOT NULL,
-              power_level INTEGER NOT NULL
-          );
+            CREATE TABLE professions (
+                id SERIAL PRIMARY KEY NOT NULL,
+                name VARCHAR(256) NOT NULL
+            );  
+
+            CREATE TABLE dannys (
+                id SERIAL PRIMARY KEY NOT NULL,
+                name VARCHAR(256) NOT NULL,
+                profession_id VARCHAR(256) NOT NULL REFERENCES types(id),
+                age INTEGER NOT NULL,
+                has_dignity BOOLEAN NOT NULL,
+                power_level INTEGER NOT NULL
+            );
         `);
 
         console.log('create tables complete');

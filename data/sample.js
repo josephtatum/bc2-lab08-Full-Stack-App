@@ -1,49 +1,94 @@
-// load connection string from .env
+// Load Environment Variables from the .env file
 require('dotenv').config();
-// "require" pg (after `npm i pg`)
+
+// Application Dependencies
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
 const pg = require('pg');
-// Use the pg Client
+
+// Database Client
 const Client = pg.Client;
-// **note:** you will need to create the database!
+const client = new Client(process.env.DATABASE_URL);
+client.connect();
 
-// async/await needs to run in a function
-run();
+// Application Setup
+const app = express();
+const PORT = process.env.PORT;
+app.use(morgan('dev')); // http logging
+app.use(cors()); // enable CORS request
+app.use(express.static('public')); // server files from /public folder
+app.use(express.json()); // enable reading incoming json data
 
-async function run() {
-    // make a new pg client to the supplied url
-    const client = new Client(process.env.DATABASE_URL);
+// API Routes
+
+// *** CATS ***
+app.get('/api/cats', async (req, res) => {
 
     try {
-        // initiate connecting to db
-        await client.connect();
-
-        // run a query to create tables
-        await client.query(`
-            CREATE TABLE types (
-                id SERIAL PRIMARY KEY NOT NULL,
-                name VARCHAR(256) NOT NULL
-            );
-
-            CREATE TABLE cats (
-                id SERIAL PRIMARY KEY NOT NULL,
-                name VARCHAR(256) NOT NULL,
-                type_id INTEGER NOT NULL REFERENCES types(id),
-                url VARCHAR(256) NOT NULL,
-                year INTEGER NOT NULL,
-                lives INTEGER NOT NULL,
-                is_sidekick BOOLEAN NOT NULL
-            );
+        const result = await client.query(`
+            SELECT
+                c.*,
+                t.name as type
+            FROM cats c
+            JOIN types t
+            ON   c.type_id = t.id
+            ORDER BY c.year;
         `);
 
-        console.log('create tables complete');
+        res.json(result.rows);
     }
     catch (err) {
-        // problem? let's see the error...
         console.log(err);
-    }
-    finally {
-        // success or failure, need to close the db connection
-        client.end();
+        res.status(500).json({
+            error: err.message || err
+        });
     }
 
-}
+});
+
+app.post('/api/cats', async (req, res) => {
+    const cat = req.body;
+
+    try {
+        const result = await client.query(`
+            INSERT INTO cats (name, type_id, url, year, lives, is_sidekick)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING *;
+        `,
+        [cat.name, cat.typeId, cat.url, cat.year, cat.lives, cat.isSidekick]
+        );
+
+        res.json(result.rows[0]);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+});
+
+// *** TYPES ***
+app.get('/api/types', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT *
+            FROM types
+            ORDER BY name;
+        `);
+
+        res.json(result.rows);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log('server running on PORT', PORT);
+});
