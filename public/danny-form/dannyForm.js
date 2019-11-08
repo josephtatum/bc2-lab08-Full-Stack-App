@@ -31,8 +31,7 @@ class DannyForm extends Component {
 
             try {
                 const newDanny = await addDanny(danny);
-                console.log(newDanny);
-                // window.location = 'danny-list.html';
+                window.location = 'danny-list.html';
             }
 
             catch (err) {
