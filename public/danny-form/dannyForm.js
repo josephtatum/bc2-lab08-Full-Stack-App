@@ -25,7 +25,14 @@ class DannyForm extends Component {
                 power_level: parseInt(formData.get('power-level'))
             };
 
-            console.log(danny)
+            try {
+                const newDanny = await addDanny(danny);
+
+                window.location = 'danny-list/index.html';
+            }
+
+            catch (err)
+            console.log('danny not added :(', err);
         });
     }
 
