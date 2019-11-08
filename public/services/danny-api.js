@@ -17,3 +17,18 @@ export async function getProfessions() {
 
     return data;
 }
+
+export async function addDanny(danny) {
+    const url = `${URL}/dannys`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(danny)
+    });
+
+    const data = await response.json();
+    return data;
+}
