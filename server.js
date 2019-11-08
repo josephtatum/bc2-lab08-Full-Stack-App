@@ -45,11 +45,11 @@ app.post('/api/dannys', async (req, res) => {
 
     try {
         const result = await client.query(`
-            INSERT INTO dannys (name, profession_id, has_dignity, age, power_level)
+            INSERT INTO dannys (name, profession_id, age, has_dignity, power_level)
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
         `,
-        [danny.name, danny.professionId, danny.hasDignity, danny.age, danny.powerLevel]
+        [danny.name, danny.profession_id, danny.age, danny.has_dignity, danny.power_level]
         );
 
         res.json(result.rows[0]);

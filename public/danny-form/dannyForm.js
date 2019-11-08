@@ -17,19 +17,22 @@ class DannyForm extends Component {
             event.preventDefault();
 
             const formData = new FormData(dom);
+            const boolHasDignity = ((formData.get('dignity')) === 'true');
 
             const danny = {
                 name: formData.get('name'),
-                profession: formData.get('profession'),
+                profession_id: parseInt(formData.get('profession-id')),
                 age: parseInt(formData.get('age')),
-                has_dignity: formData.get('dignity'),
+                has_dignity: boolHasDignity,
                 power_level: parseInt(formData.get('power-level'))
             };
 
+            console.log(danny);
+
             try {
                 const newDanny = await addDanny(danny);
-
-                window.location = 'danny-list.html';
+                console.log(newDanny);
+                // window.location = 'danny-list.html';
             }
 
             catch (err) {
@@ -51,7 +54,7 @@ class DannyForm extends Component {
                 <label for="name">Name:</label><input id="name" name="name" type="text">
                 <label for="age">Age:</label><input id="age" name="age" type="number">
                 <label for="profession">Profession:</label>
-                <select id="profession" name="profession">
+                <select id="profession" name="profession-id">
                     ${optionsListJoined}
                 </select>
                 <label id="dignity">Does this Danny have dignity?
