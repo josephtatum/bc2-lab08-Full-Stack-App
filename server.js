@@ -25,7 +25,7 @@ app.get('/api/dannys', async (req, res) => {
                 p.name as profession
             FROM dannys d
             JOIN professions p
-            ON   d.type_id = p.id
+            ON   d.profession_id = p.id
             ORDER BY d.power_level;
         `);
 
@@ -49,7 +49,7 @@ app.post('/api/dannys', async (req, res) => {
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
         `,
-        [danny.name, danny.typeId, danny.hasDignity, danny.age, danny.powerLevel]
+        [danny.name, danny.professionId, danny.hasDignity, danny.age, danny.powerLevel]
         );
 
         res.json(result.rows[0]);

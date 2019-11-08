@@ -19,7 +19,7 @@ async function run() {
             CREATE TABLE dannys (
                 id SERIAL PRIMARY KEY NOT NULL,
                 name VARCHAR(256) NOT NULL,
-                profession_id VARCHAR(256) NOT NULL REFERENCES types(id),
+                profession_id VARCHAR(256) NOT NULL REFERENCES professions(id),
                 age INTEGER NOT NULL,
                 has_dignity BOOLEAN NOT NULL,
                 power_level INTEGER NOT NULL
