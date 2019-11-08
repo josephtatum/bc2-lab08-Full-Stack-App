@@ -12,6 +12,7 @@ async function run() {
     
         await client.query(`
            DROP TABLE IF EXISTS dannys;
+           DROP TABLE IF EXISTS professions;
         `);
 
         console.log('drop tables complete');

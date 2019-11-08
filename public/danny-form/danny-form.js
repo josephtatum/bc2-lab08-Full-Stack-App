@@ -1,4 +1,4 @@
-import App from './js';
+import DannyFormApp from './dannyFormApp.js';
 
-const app = new App();
+const app = new DannyFormApp();
 document.body.prepend(app.renderDOM());
