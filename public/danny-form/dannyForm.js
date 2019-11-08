@@ -1,4 +1,5 @@
 import Component from '../Component.js';
+import { addDanny } from '../services/danny-api.js';
 
 class DannyForm extends Component {
 
@@ -28,11 +29,13 @@ class DannyForm extends Component {
             try {
                 const newDanny = await addDanny(danny);
 
-                window.location = 'danny-list/index.html';
+                window.location = 'danny-list.html';
             }
 
-            catch (err)
-            console.log('danny not added :(', err);
+            catch (err) {
+                console.log('danny not added :(', err);
+            }
+            
         });
     }
 
