@@ -1,15 +1,14 @@
 import Component from '../Component.js';
 class Header extends Component {
     renderHTML() {
-        const title = this.props.title || 'Famous Cats';
+        const title = this.props.title || 'Famous Dans';
         return /*html*/`
            <header>
-               <img class=“logo” src=“assets/alchemy-logo.png” alt=“Alchemy Code Lab Logo”>
                <h1>${title}</h1>
                <nav>
-                   <a href=“./“>Home</a>
-                   <a href=“./cat-list.html”>Cats</a>
-                   <a href=“./cat-form.html”>Add a Cat</a>
+                   <a href=“/“>Home</a>
+                   <a href=“/danny-list.html”>Dans</a>
+                   <a href=“/danny-form.html”>Add a Dan</a>
                </nav>
            </header>
        `;
