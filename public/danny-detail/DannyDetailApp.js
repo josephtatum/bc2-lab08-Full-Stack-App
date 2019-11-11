@@ -4,7 +4,7 @@ import Loading from '../common/Loading.js';
 import DannyDetail from './DannyDetail.js';
 import { getDanny } from '../services/danny-api.js';
 
-class CatDetailApp extends Component {
+class DannyDetailApp extends Component {
 
     async onRender(dom) {
         const header = new Header();
@@ -15,20 +15,18 @@ class CatDetailApp extends Component {
         const loading = new Loading({ loading: true });
         main.appendChild(loading.renderDOM());
 
-        // extracting query param for id of cat to get
         const searchParams = new URLSearchParams(window.location.search);
         const id = searchParams.get('id');
 
-        // no id? bail and go back to list
         if (!id) {
-            window.location = 'cat-list.html';
+            window.location = 'danny-list.html';
             return;
         }
 
         try {
-            const cat = await getCat(id);
-            const catDetail = new CatDetail({ cat });
-            main.appendChild(catDetail.renderDOM());
+            const danny = await getDanny(id);
+            const dannyDetail = new DannyDetail({ danny });
+            main.appendChild(dannyDetail.renderDOM());
         }
         catch (err) {
             console.log(err);
@@ -41,13 +39,11 @@ class CatDetailApp extends Component {
     renderHTML() {
         return /*html*/`
             <div>
-                <!-- header goes here -->
                 <main>
-                    
                 </main>
             </div>
         `;
     }
 }
 
-export default CatDetailApp;
+export default DannyDetailApp;
