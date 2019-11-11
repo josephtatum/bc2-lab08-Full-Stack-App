@@ -60,3 +60,12 @@ form {
 form div {
     margin-bottom: 10px;
 }
+
+div.dannydeets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    padding: 40px;
+    margin: auto;
+}

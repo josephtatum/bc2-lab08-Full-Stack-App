@@ -5,7 +5,7 @@ class DannyDetail extends Component {
         const danny = this.props.danny;
         const json = JSON.stringify(danny, true, 4);
         return /*html*/`
-            <pre>${json}</pre>
+            <div class='dannydeets'>${json}</div>
         `;
     }
 }
