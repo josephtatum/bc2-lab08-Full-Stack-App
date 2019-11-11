@@ -41,15 +41,15 @@ export async function addDanny(danny) {
     return data;
 }
 
-export async function deleteDanny(danny) {
-    const url = `${URL}/dannys`;
+export async function deleteDanny(id) {
+    const url = `${URL}/dannys/delete${id}`;
 
     const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(danny)
+        body: JSON.stringify(id)
     });
 
     const data = await response.json();

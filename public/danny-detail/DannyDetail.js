@@ -1,13 +1,20 @@
 import Component from '../Component.js';
+import {deleteDanny } from '../services/danny-api.js';
 
 class DannyDetail extends Component {
 
     onRender(dom) {
-        const deleteDanny = dom.querySelector('.delete-danny');
+        const danny = this.props.danny;
+        const deleteDannyButton = dom.querySelector('.delete-danny');
 
-        deleteDanny.addEventListener('click', () => {
-            
+        deleteDannyButton.addEventListener('click', () => {
+            let confirmChoice = confirm('Do you really want to delete this danny?');
+
+            if (confirmChoice) {
+                deleteDanny();
+            }
         });
+        
     }
     renderHTML() {
         const danny = this.props.danny;

@@ -75,19 +75,33 @@ app.get('/api/dannys/:id', async (req, res) => {
 });
 
 // delete a danny
-app.delete('', async (req,res) => {
-    const danny = req.body;
-
+app.get('api/dannys/delete/:id', async (req, res) => {
+    const id = req.params.id;
     try {
-        const dannyToDelete = await client.query(`
-            SELECT danny from dannys
+        const result = await client.query(`
+            DELETE FROM
+                d.*,
+                p.name as profession
+            FROM dannys d
+            JOIN professions p
+            ON   d.profession_id = p.id
+            WHERE d.id = $1
         `,
-        
-        )
+        [id]);
+
+        const danny = result;
+        console.log(danny)
+        if (!danny) {
+            res.status(404).json({
+                error: `Danny id ${id} does not exist`
+            });
+        }
+        else {
+            res.json(danny);
+        }
     }
 
     catch (err) {
-        console.log(err);
         res.status(500).json({
             error: err.message || err
         });
