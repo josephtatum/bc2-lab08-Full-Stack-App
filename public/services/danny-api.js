@@ -41,7 +41,7 @@ export async function addDanny(danny) {
     return data;
 }
 
-export async function deleteDanny(id) {
+export async function deleteDanny() {
     const url = `${URL}/dannys/delete`;
 
     const response = await fetch(url, {
