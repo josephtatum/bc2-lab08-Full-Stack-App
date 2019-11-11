@@ -1,5 +1,6 @@
 import Component from '../Component.js';
 import Header from '../common/Header.js';
+import Loading from '../common/Loading.js';
 import DannyList from './dannyList.js';
 import { getDannys } from '../services/danny-api.js';
 
@@ -12,6 +13,9 @@ class DannyApp extends Component {
         const dannyList = new DannyList({ dannys: [] });
         const main = dom.querySelector('main');
         main.appendChild(dannyList.renderDOM());
+
+        const loading = new Loading({ loading: true });
+        main.appendChild(loading.renderDOM());
 
         getDannys().then(dannys => {
             dannyList.update({ dannys });
