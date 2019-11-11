@@ -9,6 +9,14 @@ export async function getDannys() {
     return data;
 }
 
+export async function getDanny(id) {  
+    const url = `${URL}/dannys/${id}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
+
 export async function getProfessions() {
     const url = `${URL}/professions`;
 
