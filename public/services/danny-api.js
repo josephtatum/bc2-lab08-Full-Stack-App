@@ -40,3 +40,17 @@ export async function addDanny(danny) {
     const data = await response.json();
     return data;
 }
+
+export async function deleteDanny() {
+    const url = `${URL}/dannys/delete`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    const data = await response.json();
+    return data;
+}

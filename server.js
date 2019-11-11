@@ -39,6 +39,76 @@ app.get('/api/dannys', async (req, res) => {
 
 });
 
+// reder detail page
+app.get('/api/dannys/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const result = await client.query(`
+            SELECT
+                d.*,
+                p.name as profession
+            FROM dannys d
+            JOIN professions p
+            ON   d.profession_id = p.id
+            WHERE d.id = $1
+        `,
+        [id]);
+
+        const danny = result.rows[0];
+
+        if (!danny) {
+            res.status(404).json({
+                error: `Danny id ${id} does not exist`
+            });
+        }
+        else {
+            res.json(danny);
+        }
+    }
+
+    catch (err) {
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+});
+
+// delete a danny
+app.get('api/dannys/delete/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const result = await client.query(`
+            DELETE FROM
+                d.*,
+                p.name as profession
+            FROM dannys d
+            JOIN professions p
+            ON   d.profession_id = p.id
+            WHERE d.id = $1
+        `,
+        [id]);
+
+        const danny = result;
+        
+        if (!danny) {
+            res.status(404).json({
+                error: `Danny id ${id} does not exist`
+            });
+        }
+        else {
+            res.json(danny);
+        }
+    }
+
+    catch (err) {
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+
+});
+
 // Post dannys
 app.post('/api/dannys', async (req, res) => {
     const danny = req.body;

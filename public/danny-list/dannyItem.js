@@ -12,6 +12,9 @@ class DannyItem extends Component {
                     <p class="danny-age">Age: <b>${danny.age}</b></p>
                     <p class="danny-power">Power Level: <b>${danny.power_level}</b></p>
                     <p class="danny-dignity">Dignity: <b>${danny.has_dignity}</b></p>
+                    <p class="danny-detail-view">
+                        <a href="danny-detail.html?id=${danny.id}">View Details</a>
+                    </p>
                 </div>
             </li>
         `;
