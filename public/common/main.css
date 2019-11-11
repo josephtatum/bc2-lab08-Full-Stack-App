@@ -10,7 +10,6 @@ body {
 }
 
 
-
 header {
     display: flex;
     flex-direction: row;
@@ -24,6 +23,14 @@ header {
 
 main {
     padding: 25px;
+}
+
+nav a {
+    margin-right: 5px;
+}
+
+a:visited {
+    color: black;
 }
 
 ul.dannys {
