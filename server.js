@@ -39,7 +39,7 @@ app.get('/api/dannys', async (req, res) => {
 
 });
 
-
+// reder detail page
 app.get('/api/dannys/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -72,6 +72,27 @@ app.get('/api/dannys/:id', async (req, res) => {
             error: err.message || err
         });
     }
+});
+
+// delete a danny
+app.delete('', async (req,res) => {
+    const danny = req.body;
+
+    try {
+        const dannyToDelete = await client.query(`
+            SELECT danny from dannys
+        `,
+        
+        )
+    }
+
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+
 });
 
 // Post dannys
