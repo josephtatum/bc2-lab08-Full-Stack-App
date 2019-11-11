@@ -6,7 +6,7 @@ import { getProfessions } from '../services/danny-api.js';
 
 class DannyFormApp extends Component {
 
-    async conRender(dom) {
+    async onRender(dom) {
         const header = new Header({ title: 'Only the Best Dannys' });
         dom.prepend(header.renderDOM());
 
