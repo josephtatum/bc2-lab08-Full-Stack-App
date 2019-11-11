@@ -27,6 +27,7 @@ main {
 
 nav a {
     margin-right: 5px;
+    color: black;
 }
 
 a:visited {

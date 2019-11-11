@@ -17,9 +17,19 @@ class DannyApp extends Component {
         const loading = new Loading({ loading: true });
         main.appendChild(loading.renderDOM());
 
-        getDannys().then(dannys => {
-            dannyList.update({ dannys });
-        });
+        try {
+            getDannys().then(dannys => {
+                dannyList.update({ dannys });
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
+        finally {
+            setTimeout(() => {
+                loading.update({ loading: false });
+            }, 500);
+        }
     }
 
     renderHTML() {
