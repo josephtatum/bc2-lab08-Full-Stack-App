@@ -22,9 +22,11 @@ class DannyApp extends Component {
                 dannyList.update({ dannys });
             });
         }
+
         catch (err) {
             console.log(err);
         }
+        
         finally {
             setTimeout(() => {
                 loading.update({ loading: false });
