@@ -1,5 +1,5 @@
 import Component from '../Component.js';
-import {deleteDanny } from '../services/danny-api.js';
+import { deleteDanny } from '../services/danny-api.js';
 
 class DannyDetail extends Component {
 
@@ -11,7 +11,7 @@ class DannyDetail extends Component {
             let confirmChoice = confirm('Do you really want to delete this danny?');
 
             if (confirmChoice) {
-                deleteDanny();
+                deleteDanny(danny);
             }
         });
         

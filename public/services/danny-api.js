@@ -42,14 +42,13 @@ export async function addDanny(danny) {
 }
 
 export async function deleteDanny(id) {
-    const url = `${URL}/dannys/delete${id}`;
+    const url = `${URL}/dannys/delete`;
 
     const response = await fetch(url, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(id)
     });
 
     const data = await response.json();

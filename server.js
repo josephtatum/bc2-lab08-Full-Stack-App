@@ -90,7 +90,7 @@ app.get('api/dannys/delete/:id', async (req, res) => {
         [id]);
 
         const danny = result;
-        console.log(danny)
+        
         if (!danny) {
             res.status(404).json({
                 error: `Danny id ${id} does not exist`
